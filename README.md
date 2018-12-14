@@ -11,8 +11,8 @@ for demonstration purposes.
 1: SQLite3
 
 ### How to run the project:
-1: Make sure SQLite3 is installed on your computer. Create the table `visited` by opening typing the following
-on the sql cli:
+1: Make sure SQLite3 is installed on your computer. Create the table `visited` by opening the terminal and typing the following
+on the cli:
 ```
 sqlite3 /Users/WebCrawler/src/crawler/crawler.db
 sqlite3> CREATE TABLE IF NOT EXISTS visited (
