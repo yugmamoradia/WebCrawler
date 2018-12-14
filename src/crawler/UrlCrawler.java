@@ -29,7 +29,7 @@ public class UrlCrawler {
     /**
      * Business logic to parse the links and deep links
      * @param baseUrl The start URL or the base URL where we start parsing. For making this method more customized.
-     * @param Url The URL to crawl
+     * @param url The URL to crawl
      * @param word The word to be searched for
      * @throws SQLException
      * @throws IOException
