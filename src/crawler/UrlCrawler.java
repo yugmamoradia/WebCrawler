@@ -77,7 +77,9 @@ public class UrlCrawler {
      * Main method to call the business logic
      */
     public static void main(String[] args) throws IOException, SQLException, URISyntaxException {
-        //databaseHandler.truncateTableQuery("delete from visited;");
+        // Comment the following line out if you don't want to truncate upon every run
+        databaseHandler.truncateTableQuery("delete from visited;");
+
         crawl("http://www.berkeley.edu","http://www.berkeley.edu", "research");
     }
 }
