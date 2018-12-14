@@ -64,8 +64,8 @@ public class UrlCrawler {
                 String domainName = getDomainName(baseUrl); // Example: "yahoo.com"
 
                 // get all links and recursively call the crawl method
-                Elements questions = document.select("a[href]");
-                for(Element link: questions){
+                Elements elements = document.select("a[href]");
+                for(Element link: elements){
                     if(link.attr("href").contains(domainName))
                         crawl(baseUrl, link.attr("abs:href"), word);
                 }
