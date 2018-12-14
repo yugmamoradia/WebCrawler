@@ -42,15 +42,16 @@ public class UrlCrawler {
 
         // Null check on the String params.
         if(baseUrl != null && url != null && word != null){
-            //check if the given URL is already in database
-            String sql = "select * from visited where URL = '"+url+"'";
-            ResultSet resultSet = databaseHandler.runSelectQuery(sql);
+            // Validate if the given URL is in DB or not. If it exists, that means we already have visited it and
+            // do not need to visit again
+            String query = "select * from visited where URL = '"+url+"'";
+            ResultSet resultSet = databaseHandler.runSelectQuery(query);
 
             // If it doesn't exist in the Database then keep crawling
             if(!resultSet.next()){
-                //store the URL to database to avoid parsing again
-                sql = "INSERT INTO visited (URL) VALUES (?)";
-                PreparedStatement preparedStatement = databaseHandler.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                // Update the DB by inserting the url in the table
+                query = "INSERT INTO visited (URL) VALUES (?)";
+                PreparedStatement preparedStatement = databaseHandler.connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setString(1, url);
                 preparedStatement.execute();
 
