@@ -34,16 +34,16 @@ public class UrlCrawler {
      * @throws SQLException
      * @throws IOException
      */
-    public static void crawl(String baseUrl, String Url, String word) throws SQLException, IOException, URISyntaxException {
+    public static void crawl(String baseUrl, String url, String word) throws SQLException, IOException, URISyntaxException {
         if(databaseHandler.connection == null){
             System.out.println("Cannot connect to the database. Will not proceed further");
             throw new SQLException();
         }
 
         // Null check on the String params.
-        if(baseUrl != null && Url != null && word != null){
+        if(baseUrl != null && url != null && word != null){
             //check if the given URL is already in database
-            String sql = "select * from visited where URL = '"+Url+"'";
+            String sql = "select * from visited where URL = '"+url+"'";
             ResultSet resultSet = databaseHandler.runSelectQuery(sql);
 
             // If it doesn't exist in the Database then keep crawling
@@ -51,14 +51,14 @@ public class UrlCrawler {
                 //store the URL to database to avoid parsing again
                 sql = "INSERT INTO visited (URL) VALUES (?)";
                 PreparedStatement preparedStatement = databaseHandler.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                preparedStatement.setString(1, Url);
+                preparedStatement.setString(1, url);
                 preparedStatement.execute();
 
                 // Parse and extract information from the base URL
                 Document document = Jsoup.connect(baseUrl).get();
 
                 if(document.text().contains(word)){
-                    System.out.println(Url);
+                    System.out.println(url);
                 }
 
                 String domainName = getDomainName(baseUrl); // Example: "yahoo.com"
